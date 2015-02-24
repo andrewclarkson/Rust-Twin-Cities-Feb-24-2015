@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <title>Welcome to Rust!</title>
+
+    
+    <link rel="stylesheet" href="http://doc.rust-lang.org/rust.css">
+<link rel="stylesheet" href="sliderust.css">
+<script src="sliderust.js"></script>
+
+
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+    <h1 class="title">Welcome to Rust!</h1>
+    <p>Andrew Clarkson</p>
+
+<p>February 24th, 2015</p>
+
+<h1 id="big-thanks!" class='section-header'><a
+                           href="#big-thanks!">Big Thanks!</a></h1>
+<ul>
+<li>Code 42</li>
+<li>Sam</li>
+</ul>
+
+<h1 id="quick-poll" class='section-header'><a
+                           href="#quick-poll">Quick Poll</a></h1>
+<p>Raise your hands don&#39;t be shy...</p>
+
+<h1 id="what-the-heck-is-rust?" class='section-header'><a
+                           href="#what-the-heck-is-rust?">What the Heck is Rust?</a></h1>
+<p>A systems programming language designed to be:</p>
+
+<ul>
+<li>fast</li>
+<li>concurrent</li>
+<li>safe</li>
+</ul>
+
+<h1 id="origin-story" class='section-header'><a
+                           href="#origin-story">Origin Story</a></h1>
+<p>Why create <em>another</em> language?</p>
+
+<h1 id="where-are-we-at?" class='section-header'><a
+                           href="#where-are-we-at?">Where Are We At?</a></h1>
+<ul>
+<li>alpha2 (feature complete)</li>
+<li>under heavy development</li>
+<li>nightlies</li>
+</ul>
+
+<h1 id="milestones" class='section-header'><a
+                           href="#milestones">Milestones</a></h1>
+<ul>
+<li>alpha2 released on Friday (February 20th, 2015)</li>
+<li>stable planned for March 9th, 2015</li>
+<li>beta planned for March 31st, 2015</li>
+<li>1.0 planned for May 15th, 2015</li>
+</ul>
+
+<h1 id="rust-wants-you!" class='section-header'><a
+                           href="#rust-wants-you!">Rust Wants You!</a></h1>
+<ul>
+<li>alpha2: Grok API&#39;s</li>
+<li>stable: Refactor crates</li>
+<li>beta: Test and polish!</li>
+</ul>
+
+<h1 id="why-is-rust-so-cool" class='section-header'><a
+                           href="#why-is-rust-so-cool">Why is Rust so Cool</a></h1>
+<p>Based on some fine Rustaceans on Reddit:</p>
+
+<ul>
+<li>Memory model</li>
+<li>Algebraic Data Types</li>
+<li>Functional Style</li>
+<li>Scoping, Modules, &amp; Crates </li>
+<li>No Cost Abstraction</li>
+<li>The Community</li>
+</ul>
+
+<h1 id="memory" class='section-header'><a
+                           href="#memory">Memory</a></h1>
+<ul>
+<li>Efficient</li>
+<li>Safe</li>
+</ul>
+
+<h1 id="borrowing-&amp;-regions" class='section-header'><a
+                           href="#borrowing-&amp;-regions">Borrowing &amp; Regions</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>borrow</span>(<span class='ident'>x</span>: <span class='kw-2'>&amp;</span><span class='ident'>int</span>) {
+    <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&quot;</span>, <span class='ident'>x</span>);
+}
+
+<span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='number'>10</span>;
+<span class='ident'>borrow</span>(<span class='kw-2'>&amp;</span><span class='ident'>x</span>);
+</pre>
+
+<h1 id="owned-stuff" class='section-header'><a
+                           href="#owned-stuff">Owned Stuff</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>fn</span> <span class='ident'>own</span>(<span class='ident'>x</span>: <span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>int</span><span class='op'>&gt;</span>) {
+    <span class='comment'>// x dies here</span>
+}
+{
+    <span class='kw'>let</span> <span class='ident'>x</span> <span class='op'>=</span> <span class='ident'>Box</span>::<span class='ident'>new</span>(<span class='number'>7</span>);
+    <span class='ident'>own</span>(<span class='ident'>x</span>);
+}
+</pre>
+
+<h1 id="algebraic-data-types" class='section-header'><a
+                           href="#algebraic-data-types">Algebraic Data Types</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>enum</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
+    <span class='prelude-val'>Some</span>(<span class='ident'>T</span>),
+    <span class='prelude-val'>None</span>
+}
+</pre>
+
+<h1 id="functional-style" class='section-header'><a
+                           href="#functional-style">Functional Style</a></h1><pre id='rust-example-rendered' class='rust '>
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>;
+<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>iter</span>::<span class='ident'>AdditiveIterator</span>;
+
+<span class='kw'>let</span> <span class='ident'>sum</span>: <span class='ident'>u32</span> <span class='op'>=</span>
+    <span class='ident'>iter</span>::<span class='ident'>count</span>(<span class='number'>0</span>, <span class='number'>1</span>).
+    <span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>n</span><span class='op'>|</span> <span class='ident'>n</span> <span class='op'>*</span> <span class='ident'>n</span>).
+    <span class='ident'>take_while</span>(<span class='op'>|</span><span class='kw-2'>&amp;</span><span class='ident'>n</span><span class='op'>|</span> <span class='ident'>n</span> <span class='op'>&lt;</span> <span class='number'>1000u32</span>).
+    <span class='ident'>filter</span>(<span class='op'>|</span><span class='ident'>n</span><span class='op'>|</span> <span class='ident'>is_odd</span>(<span class='op'>*</span><span class='ident'>n</span>)).
+    <span class='ident'>sum</span>();
+
+<span class='kw'>fn</span> <span class='ident'>is_odd</span>(<span class='ident'>n</span>: <span class='ident'>u32</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> { <span class='ident'>n</span> <span class='op'>%</span> <span class='number'>2</span> <span class='op'>==</span> <span class='number'>1</span> }
+</pre>
+
+<h1 id="modules-and-crates" class='section-header'><a
+                           href="#modules-and-crates">Modules and Crates</a></h1>
+<ul>
+<li>No more <code>ngx_printf</code></li>
+<li>Real package manager
+# No Cost Abstraction
+```
+trait Barking {
+fn bark(&amp;self);
+}</li>
+</ul>
+
+<p>fn make_bark<T: Barking>(barker: T) {
+    barker.bark();
+}
+```</p>
+
+<h1 id="what-is-it-good-for?" class='section-header'><a
+                           href="#what-is-it-good-for?">What is it good for?</a></h1>
+<ul>
+<li>Game Development</li>
+<li>Servo</li>
+<li>Data Science</li>
+<li>Databases</li>
+<li>Servers</li>
+<li>Embedded</li>
+<li>?</li>
+</ul>
+
+    <script type="text/javascript">
+        window.playgroundUrl = "";
+    </script>
+    
+</body>
+</html>
